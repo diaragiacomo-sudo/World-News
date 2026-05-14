@@ -1,0 +1,6 @@
+{
+  "name": "Nexus Global Transport Simulator",
+  "description": "Un simulatore interattivo di percorsi globali per aerei, treni e navi con aggiornamenti in tempo reale e ricerca dati assistita da AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

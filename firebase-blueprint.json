@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Registered user of the transport simulator",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "favorites": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["uid", "email"]
+    },
+    "Route": {
+      "title": "Route",
+      "description": "A transport route (plane, train, ship)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["plane", "train", "ship"] },
+        "fromCoords": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "toCoords": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "fromName": { "type": "string" },
+        "toName": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "delayed", "scheduled"] },
+        "cargo": { "type": "string" },
+        "departureTime": { "type": "string", "format": "date-time" },
+        "arrivalTime": { "type": "string", "format": "date-time" },
+        "progress": { "type": "number" }
+      },
+      "required": ["id", "type", "fromCoords", "toCoords", "status"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "Alert for route departures or arrivals",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "isRead": { "type": "boolean" }
+      },
+      "required": ["id", "userId", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "User profiles and preferences" },
+    "/routes/{routeId}": { "schema": "Route", "description": "Global transport routes" },
+    "/notifications/{notifId}": { "schema": "Notification", "description": "User notifications" }
+  }
+}
